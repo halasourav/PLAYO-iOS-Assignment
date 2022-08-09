@@ -12,7 +12,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let newsUrl = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=759e86f1ea40433e8ba4bba3ef9965ee"
     let header: HTTPHeaders = ["Accept": "application/json"]
+    
     var news = [News]()
+    let refreshControl = UIRefreshControl()
     
     @IBOutlet weak var newsTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -20,6 +22,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         updateNewsTable()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        newsTableView.refreshControl = refreshControl
+        
     }
     
     //MARK: Table View Methods
@@ -73,6 +79,12 @@ extension ViewController {
                 print("Error: Unable Fetch News")
             }
         }
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing News")
+        updateNewsTable()
+        refreshControl.endRefreshing()
     }
     
 }
