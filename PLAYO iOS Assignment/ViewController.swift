@@ -10,8 +10,10 @@ import Alamofire
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let newsUrl = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=759e86f1ea40433e8ba4bba3ef9965ee"
+    let newsApi = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=759e86f1ea40433e8ba4bba3ef9965ee"
     let header: HTTPHeaders = ["Accept": "application/json"]
+    
+    var newsUrl = ""
     
     var news = [News]()
     let refreshControl = UIRefreshControl()
@@ -21,11 +23,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateNewsTable()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         newsTableView.refreshControl = refreshControl
-        
+        updateNewsTable()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     //MARK: Table View Methods
@@ -53,6 +58,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        newsUrl = news[0].articles[indexPath.row].url
+        performSegue(withIdentifier: "NewsDetailsSegue", sender: self)
+        DispatchQueue.main.async {
+            self.newsTableView.reloadData()
+        }
+    }
+    
+    //MARK: Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let newsDetailsVC = segue.destination as? NewsDetails
+
+        newsDetailsVC?.loadView()
+        newsDetailsVC?.newsUrl = newsUrl
+        
+    }
 
 }
 
@@ -60,7 +82,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 extension ViewController {
     
     func getNews() async throws -> News{
-        return try await AF.request(newsUrl, method: .get, headers: header).serializingDecodable(News.self).value
+        return try await AF.request(newsApi, method: .get, headers: header).serializingDecodable(News.self).value
     }
     
     func updateNewsTable() {
@@ -74,7 +96,6 @@ extension ViewController {
                 newsTableView.dataSource = self
                 newsTableView.reloadData()
                 activityIndicator.stopAnimating()
-                activityIndicator.isHidden = true
             } catch {
                 print("Error: Unable Fetch News")
             }

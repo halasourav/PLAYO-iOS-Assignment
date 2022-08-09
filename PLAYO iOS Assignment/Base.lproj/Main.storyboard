@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xDO-zc-eqh">
     <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--News-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PLAYO_iOS_Assignment" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OYp-YE-7KR">
-                                <rect key="frame" x="0.0" y="24" width="834" height="1150"/>
+                                <rect key="frame" x="0.0" y="74" width="834" height="1100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NewsTableCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsTableCell" rowHeight="110" id="MEN-EN-rH2" customClass="NewsTableViewCell" customModule="PLAYO_iOS_Assignment" customModuleProvider="target">
@@ -101,7 +101,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="1FT-HH-uNY">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" id="1FT-HH-uNY">
                                 <rect key="frame" x="0.0" y="227" width="834" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
@@ -117,12 +117,72 @@
                             <constraint firstItem="OYp-YE-7KR" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="z7d-KE-3l4"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="News" id="HJN-wV-odp"/>
                     <connections>
                         <outlet property="activityIndicator" destination="1FT-HH-uNY" id="FyW-h4-keN"/>
                         <outlet property="newsTableView" destination="OYp-YE-7KR" id="gCb-4c-8h2"/>
+                        <segue destination="MpP-JS-VRm" kind="show" identifier="NewsDetailsSegue" id="BMq-cB-zdT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="889.92805755395693" y="91.457286432160799"/>
+        </scene>
+        <!--News Details-->
+        <scene sceneID="AZf-PM-axN">
+            <objects>
+                <viewController id="MpP-JS-VRm" customClass="NewsDetails" customModule="PLAYO_iOS_Assignment" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U6h-qs-Vny">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-Bh-wYY">
+                                <rect key="frame" x="0.0" y="74" width="834" height="1100"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="5W4-UX-9nd">
+                                <rect key="frame" x="407" y="587" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zid-HQ-3tc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zid-HQ-3tc" firstAttribute="trailing" secondItem="Y97-Bh-wYY" secondAttribute="trailing" id="b7C-v7-06c"/>
+                            <constraint firstItem="Y97-Bh-wYY" firstAttribute="top" secondItem="zid-HQ-3tc" secondAttribute="top" id="eaC-jS-Gdk"/>
+                            <constraint firstItem="Y97-Bh-wYY" firstAttribute="leading" secondItem="zid-HQ-3tc" secondAttribute="leading" id="m3k-Lg-d2z"/>
+                            <constraint firstItem="zid-HQ-3tc" firstAttribute="bottom" secondItem="Y97-Bh-wYY" secondAttribute="bottom" id="rzb-1S-Ubb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zp3-Pb-hSa"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="5W4-UX-9nd" id="YSr-Gf-8WN"/>
+                        <outlet property="newsWebView" destination="Y97-Bh-wYY" id="tQN-b5-lja"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ljS-RA-gwd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1538.8489208633096" y="90.954773869346738"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xR2-I3-j3s">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xDO-zc-eqh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vXS-AF-IhI">
+                        <rect key="frame" x="0.0" y="24" width="834" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="2M8-NO-Qgd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4vP-ru-5jC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135.97122302158274" y="91.457286432160799"/>
         </scene>
