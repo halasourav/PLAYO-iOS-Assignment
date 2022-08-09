@@ -13,6 +13,8 @@
 		4883A12028A23DFC007F21EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4883A11E28A23DFC007F21EE /* Main.storyboard */; };
 		4883A12228A23DFD007F21EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4883A12128A23DFD007F21EE /* Assets.xcassets */; };
 		4883A12528A23DFD007F21EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4883A12328A23DFD007F21EE /* LaunchScreen.storyboard */; };
+		4883A12E28A23EC9007F21EE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4883A12D28A23EC9007F21EE /* Alamofire */; };
+		4883A13228A23F37007F21EE /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4883A13128A23F37007F21EE /* News.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,7 @@
 		4883A12128A23DFD007F21EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4883A12428A23DFD007F21EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4883A12628A23DFD007F21EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4883A13128A23F37007F21EE /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4883A12E28A23EC9007F21EE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +62,7 @@
 			children = (
 				4883A11828A23DFC007F21EE /* AppDelegate.swift */,
 				4883A11A28A23DFC007F21EE /* SceneDelegate.swift */,
+				4883A13128A23F37007F21EE /* News.swift */,
 				4883A11C28A23DFC007F21EE /* ViewController.swift */,
 				4883A11E28A23DFC007F21EE /* Main.storyboard */,
 				4883A12128A23DFD007F21EE /* Assets.xcassets */,
@@ -83,6 +88,9 @@
 			dependencies = (
 			);
 			name = "PLAYO iOS Assignment";
+			packageProductDependencies = (
+				4883A12D28A23EC9007F21EE /* Alamofire */,
+			);
 			productName = "PLAYO iOS Assignment";
 			productReference = 4883A11528A23DFC007F21EE /* PLAYO iOS Assignment.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +119,9 @@
 				Base,
 			);
 			mainGroup = 4883A10C28A23DFC007F21EE;
+			packageReferences = (
+				4883A12C28A23EC9007F21EE /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 4883A11628A23DFC007F21EE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,6 +152,7 @@
 				4883A11D28A23DFC007F21EE /* ViewController.swift in Sources */,
 				4883A11928A23DFC007F21EE /* AppDelegate.swift in Sources */,
 				4883A11B28A23DFC007F21EE /* SceneDelegate.swift in Sources */,
+				4883A13228A23F37007F21EE /* News.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +368,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4883A12C28A23EC9007F21EE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4883A12D28A23EC9007F21EE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4883A12C28A23EC9007F21EE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4883A10D28A23DFC007F21EE /* Project object */;
 }
