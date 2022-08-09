@@ -15,22 +15,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var news = [News]()
     
     @IBOutlet weak var newsTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Task.init {
-            do {
-                let news = try await getNews()
-                self.news.append(news)
-                newsTableView.delegate = self
-                newsTableView.dataSource = self
-                newsTableView.reloadData()
-            } catch {
-                print("Error: Unable Fetch News")
-            }
-        }
+        updateNewsTable()
     }
     
+    //MARK: Table View Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news[0].articles.count
     }
@@ -63,6 +55,24 @@ extension ViewController {
     
     func getNews() async throws -> News{
         return try await AF.request(newsUrl, method: .get, headers: header).serializingDecodable(News.self).value
+    }
+    
+    func updateNewsTable() {
+        activityIndicator.center = self.view.center
+        activityIndicator.startAnimating()
+        Task.init {
+            do {
+                let news = try await getNews()
+                self.news.append(news)
+                newsTableView.delegate = self
+                newsTableView.dataSource = self
+                newsTableView.reloadData()
+                activityIndicator.stopAnimating()
+                activityIndicator.isHidden = true
+            } catch {
+                print("Error: Unable Fetch News")
+            }
+        }
     }
     
 }
